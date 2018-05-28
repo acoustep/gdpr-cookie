@@ -1,0 +1,38 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+html {
+    font-size: 125%;
+}
+body {
+    color: #333;
+    font: 1rem 'Roboto Slab', system-ui;
+    padding: 1.5rem;
+}
+main {
+    margin: 0 auto;
+    max-width: 30rem;
+}
+h1, h2 {
+    color: #ee4b5a;
+    font: bold 1.5em Quicksand,sans-serif;
+    margin-bottom: 1rem;
+}
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+}
+p {
+    margin-bottom: 1rem;
+    line-height: 1.75em;
+}
+code {
+    color: #ee4b5a;
+    font: .8em monospace;
+    background: #f7f7f7;
+    padding: .15rem .25rem;
+    border-radius: .15rem;
+    border: .05rem solid #ebebeb;
+}
