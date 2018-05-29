@@ -232,7 +232,7 @@
     };
 
     // Method to check if user cookie preference exists
-    $.gdprcookie.preference = function(cookieTypeValue) {
+    $.gdprcookie.preference = function(value) {
         var control = getCookie("cookieControl");
         var preferences = getCookie("cookieControlPrefs");
         try {
@@ -244,6 +244,10 @@
 
         if (control === undefined || preferences === undefined || !$.isArray(preferences)) {
             return;
+        }
+        
+        if (value !== undefined) {
+            return preferences.indexOf(value) >= 0;
         }
         return preferences;
     };
