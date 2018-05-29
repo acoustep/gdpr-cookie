@@ -10,6 +10,7 @@
  *
  */
 (function($, window, document) {
+    "use strict";
     
     var settings, showing = false, display;
 
@@ -34,10 +35,12 @@
         }
     };
     
-    $.gdprcookie = function(options) {
-
-        // Set defaults
-        settings = $.extend({
+    $.gdprcookie = { };
+        
+    $.gdprcookie.init = function(options) {
+        
+        // Define defaults
+        var defaultSettings = {
             cookieTypes: [
                 {
                     type: "Essential",
@@ -70,13 +73,37 @@
             customShowMessage: undefined,
             customHideMessage: undefined,
             customShowChecks: undefined
-        }, window.GdprCookieSettings, options);
+        };
+
+        // Set defaults
+        settings = $.extend(defaultSettings, window.GdprCookieSettings, options);
+        
+        // Coerce into a string because this is poured into innerHTML
+        settings.message = String(settings.message);
+        
+        // Coerce into a positive number because it is passed to setTimeout
+        settings.delay = Math.max(0, +settings.delay) || 0;
+        
+        // Coerce into a positive whole number between 0 and 730 (2-ish years), to ensure a well-formed cookie value
+        settings.expires = Math.round(Math.min(Math.max(0, +settings.expires), 730)) || 0; 
+        
+        // Coerce cookieTypes into an array containing plain objects
+        if (Array.isArray(settings.cookieTypes)) {
+            settings.cookieTypes = settings.cookieTypes.filter(function(cookieType) {
+                return $.isPlainObject(cookieType);
+            });
+            if (!settings.cookieTypes.length) {
+                settings.cookieTypes = defaultSettings.cookieTypes;
+            }
+        }
+        else {
+            settings.cookieTypes = defaultSettings.cookieTypes;
+        }
         
         $(function() { display(); });
     };
     
     display = function(alwaysShow) {
-        console.log(alwaysShow);
         if (showing) {
             return;
         }
@@ -251,5 +278,8 @@
         }
         return preferences;
     };
+    
+    // Protection against malicious scripts, e.g. monkey patching
+    $.gdprcookie = Object.freeze($.gdprcookie);
 
 }(this.jQuery, this, this.document));

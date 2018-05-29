@@ -21,7 +21,7 @@ Download the latest version of `gdpr-cookie` and place it in your html, like so:
 After that you can initialize the script like so:
 
 ```javascript
-$.gdprcookie();
+$.gdprcookie.init();
 ```
 
 This will give you the default options.
@@ -35,7 +35,7 @@ The plugin by itself does not do any styling. You are responsible for making the
 Settings can be added in two ways. One way is 'the jQuery way' by passing it into the plugin call, like so:
 
 ```javascript
-$.gpdrcookie({
+$.gdprcookie.init({
     title: "...",
     message: "..."
     // etc.
