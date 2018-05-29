@@ -144,6 +144,65 @@ Manually displays the popup, e.g. for visitors to change their preferences. It's
 
 When the visitor presses the accept button, the cookie `cookieControl` with value `true` is set along with cookie `cookieControlPrefs` which contains an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
 
+## Conditionally render
+
+One of the things you'll want to do, is conditionally render passages of html that do or don't comply with the visitor's preferences. I'd advice you to completely omit the html that doesn't comply, to make sure nothing of it gets loaded.
+
+Here's one way to do it in pure javascript:
+
+```html
+<script>if ($.gdprcookie.preference("marketing")) { document.write(`
+
+    Some marketing html goes here
+
+`); }</script>
+```
+
+However, since they are usually `<script>` tags, the end-tag of it needs to be escaped to something like `</${''}script>`. So it becomes:
+
+```html
+<script>if ($.gdprcookie.preference("marketing")) { document.write(`
+
+    <script>// Some marketing script goes here</${''}script>
+
+`); }</script>
+```
+
+This uses [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) (note the `` ` `` backticks) to easily conditionally render multiple lines of html. Template strings are unavailable on Internet Explorer (but they are on Edge!).
+
+### With IE support
+
+An alternative way is to use non-standard multi-line strings. When doing this, take not of which quote characters your marketing script contains, and don't use those. It might become something like this:
+
+```html
+<script>if ($.gdprcookie.preference("marketing")) { document.write("\
+\
+    <script>// Some marketing script goes here</"+"script>\
+\
+"); }</script>
+```
+
+As you can see, this requires a `\` at the end of each line, include empty lines. It also still requires `</script>` to be escaped to `</"+"script>` (or `</'+'script>`). Less comfortable and not in compliance with any ECMAScript standard, but at least this will work on Internet Explorer.
+
+### Frameworks
+
+If you're using a frontend template framework, you're better off using that. There are many such frameworks, and each has its own way to conditionally outputting html. Not all support outputting `<script>` tags, but some do it just fine.
+
+### On the server
+
+The best way to conditionally render a passage of html, is to do it on the server. That's what it does best. So, to take a random popular serverside scripting language, it might become something like this:
+
+```php
+<?php if (gdpr_cookie_set('marketing')): ?>
+
+    <script>// Some marketing script goes here</script>
+
+<?php endif; ?>
+```
+
+It looks a lot cleaner. And it is. Other languages and other serverside template frameworks can do this in similar ways.
+Also, please note that the above function `gdpr_cookie_set` doesn't actually exist. You'll have to build something in your serverside script to check these cookies.
+
 ## License
 
 This plugin is available under the [MIT license](LICENSE.md).
