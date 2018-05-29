@@ -172,7 +172,7 @@ This uses [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaS
 
 ### With IE support
 
-An alternative way is to use non-standard multi-line strings. When doing this, take not of which quote characters your marketing script contains, and don't use those. It might become something like this:
+An alternative way is to use non-standard multi-line strings. When doing this, take note of which quote characters your marketing script contains, and don't use those. It might become something like this:
 
 ```html
 <script>if ($.gdprcookie.preference("marketing")) { document.write("\
