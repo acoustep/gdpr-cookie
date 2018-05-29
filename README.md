@@ -182,7 +182,7 @@ An alternative way is to use non-standard multi-line strings. When doing this, t
 "); }</script>
 ```
 
-As you can see, this requires a `\` at the end of each line, include empty lines. It also still requires `</script>` to be escaped to `</"+"script>` (or `</'+'script>`). Less comfortable and not in compliance with any ECMAScript standard, but at least this will work on Internet Explorer.
+As you can see, this requires a `\` at the end of each line, including empty lines. It also still requires `</script>` to be escaped to `</"+"script>` (or `</'+'script>`). Less comfortable and not in compliance with any ECMAScript standard, but at least this will work on Internet Explorer.
 
 ### Frameworks
 
