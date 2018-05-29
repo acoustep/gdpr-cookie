@@ -4,6 +4,8 @@ Inspired by [ihaveacookie](https://github.com/ketanmistry/ihavecookies).
 
 A jQuery plugin that displays a GDPR-compliant cookie consent message as required by EU regulation. The plugin displays a message when a visitor first visits your website and, by default, again 30 days after their last visit.
 
+![GDPR-cookie in action](screenshots/gdpr-cookie-popup.png)
+
 The visitor must click the accept button in order for consent to be granted, as is required by EU regulation. No cookie set means no consent, which means your site is only allowed to set essential cookies.
 
 ## Usage
@@ -30,6 +32,30 @@ The plugin by itself does not do any styling. You are responsible for making the
 
 ## Settings
 
+Settings can be added in two ways. One way is 'the jQuery way' by passing it into the plugin call, like so:
+
+```javascript
+$.gpdrcookie({
+    title: "...",
+    message: "..."
+    // etc.
+});
+```
+
+Alternatively, you can put the settings in a global variable. This is useful when a server outputs these texts, e.g. for globalization/internationalization purposes. This way you can keep the main plugin call in your separate javascript file. Works like this:
+
+```html
+<script>
+    window.GdprCookieSettings = {
+        title: "...",
+        message: "..."
+        // etc.
+    };
+</script>
+```
+
+You can also combine the two, to keep functional settings separate from localization.
+
 ### title
 
 The title that will be rendered at the very start of the popup. It'll be rendered as a `<h1>` tag. No html is allowed. Default is `"Cookies & privacy"`.
@@ -48,7 +74,7 @@ A delay in milliseconds to wait until displaying the popup after the page has lo
 
 ### expires
 
-The time in days for the cookie expiry. This means the cookie that remembers what the user has chosen. Cookies *you* set, are unaffected. Default is 30 days.
+The time in days for the cookie expiry. This means the cookie that remembers what the visitor has chosen. Cookies *you* set, are unaffected. Default is 30 days.
 
 ### acceptBtnLabel
 
@@ -116,11 +142,11 @@ Manually displays the popup, e.g. for visitors to change their preferences. It's
 
 ## Cookie
 
-When the visitor pressed the accept button, the cookie `cookieControl` with value true is set along with cookie `cookieControlPrefs` which contains an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
+When the visitor presses the accept button, the cookie `cookieControl` with value `true` is set along with cookie `cookieControlPrefs` which contains an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
 
 ## License
 
-This plugin is available under the MIT license.
+This plugin is available under the [MIT license](LICENSE.md).
 
 ## Credit
 
