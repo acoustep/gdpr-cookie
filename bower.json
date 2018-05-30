@@ -1,0 +1,24 @@
+{
+  "name": "gdpr-cookie",
+  "description": "A jQuery plugin to manage cookie settings in compliance with EU law",
+  "main": "gdpr-cookie.js",
+  "authors": [
+    "Martijn Saly (https://github.com/thany)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "gdpr",
+    "cookie",
+    "cookies",
+    "jquery",
+    "plugin"
+  ],
+  "homepage": "https://github.com/thany/gdpr-cookie",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.4"
+  }
+}
