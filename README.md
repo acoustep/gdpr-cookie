@@ -8,6 +8,38 @@ A jQuery plugin that displays a GDPR-compliant cookie consent message as require
 
 The visitor must click the accept button in order for consent to be granted, as is required by EU regulation. No cookie set means no consent, which means your site is only allowed to set essential cookies.
 
+## Installation
+
+Several ways to obtain this plugin.
+
+### Plain download
+
+You can download a [release](https://github.com/thany/gdpr-cookie/releases) or an [archive](https://github.com/thany/gdpr-cookie/archive/master.zip) and place it where you want in your project.
+
+### NPM
+
+Install via [NPM](https://www.npmjs.com/):
+
+```
+npm i gdpr-cookie
+```
+
+### Yarn
+
+Install via [Yarn](https://yarnpkg.com/):
+
+```
+yarn add gdpr-cookie
+```
+
+### Bower
+
+Install via [Bower](https://bower.io/):
+
+```
+bower install gdpr-cookie
+```
+
 ## Usage
 
 If your site already uses jQuery, make sure it's at version 1.7.4 or later. jQuery 2.x and 3.x will also work fine. Not using jQuery yet? [Download jQuery](http://jquery.com/download/) and choose whichever method suits you best to include it on your site.
@@ -15,8 +47,10 @@ If your site already uses jQuery, make sure it's at version 1.7.4 or later. jQue
 Download the latest version of `gdpr-cookie` and place it in your html, like so:
 
 ```html
-<script src=gdpr-cookie.js></script>
+<script src=/path/to/gdpr-cookie.js></script>
 ```
+
+You can also use AMD or CommonJS, which makes it easier to choose and use a packager like Webpack or Rollup to bundle your stuff.
 
 After that you can initialize the script like so:
 
