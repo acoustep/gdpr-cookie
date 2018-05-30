@@ -9,7 +9,31 @@
  * Version: 0.1
  *
  */
-(function($, window, document) {
+;(function(root, factory) {
+    if (typeof define === "function" && define.amd) {
+        // AMD
+        define([ "jquery" ], factory);
+    }
+    else if (typeof module === "object" && module.exports) {
+        // CommonJS
+        module.exports = function( root, jQuery ) {
+            if (jQuery === undefined) {
+                if (typeof window !== "undefined") {
+                    jQuery = require("jquery");
+                }
+                else {
+                    jQuery = require("jquery")(root);
+                }
+            }
+            factory(jQuery);
+            return jQuery;
+        };
+    }
+    else {
+        // Plain
+        factory(root.jQuery);
+    }
+}(this, function($) {
     "use strict";
     
     var settings, showing = false, display;
@@ -282,4 +306,4 @@
     // Protection against malicious scripts, e.g. monkey patching
     $.gdprcookie = Object.freeze($.gdprcookie);
 
-}(this.jQuery, this, this.document));
+}));
