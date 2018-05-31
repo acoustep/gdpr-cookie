@@ -40,6 +40,14 @@ Install via [Bower](https://bower.io/):
 bower install gdpr-cookie
 ```
 
+### Meteor
+
+Install via [Meteor](https://www.meteor.com/):
+
+```
+meteor add thany:gdpr-cookie
+```
+
 ## Usage
 
 If your site already uses jQuery, make sure it's at version 1.7.4 or later. jQuery 2.x and 3.x will also work fine. Not using jQuery yet? [Download jQuery](http://jquery.com/download/) and choose whichever method suits you best to include it on your site.
