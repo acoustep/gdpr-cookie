@@ -253,6 +253,10 @@ The best way to conditionally render a passage of html, is to do it on the serve
 It looks a lot cleaner. And it is. Other languages and other serverside template frameworks can do this in similar ways.
 Also, please note that the above function `gdpr_cookie_set` doesn't actually exist. You'll have to build something in your serverside script to check these cookies.
 
+## Changelog
+
+See [Changelog](CHANGELOG.md).
+
 ## License
 
 This plugin is available under the [MIT license](LICENSE.md).
