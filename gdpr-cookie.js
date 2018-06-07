@@ -235,7 +235,7 @@
 
                 // Save user cookie preferences (in a cookie!)
                 var prefs = $.map(elements.allChecks.filter(function() { return this.checked || this.disabled; }), function(checkbox) { return checkbox.value; });
-                setCookie("cookieControlPrefs", JSON.stringify(prefs), 365);
+                setCookie("cookieControlPrefs", JSON.stringify(prefs), settings.expires);
 
                 // Trigger cookie accept event
                 body.trigger("gdpr:accept");
