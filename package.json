@@ -1,6 +1,6 @@
 {
   "name": "gdpr-cookie",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A jQuery plugin to manage cookie settings in compliance with EU law",
   "browser": "gdpr-cookie.js",
   "repository": "git+https://github.com/thany/gdpr-cookie.git",

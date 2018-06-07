@@ -6,7 +6,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 0.1
+ * Version: 0.2.0
  *
  */
 ;(function(root, factory) {

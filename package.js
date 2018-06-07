@@ -1,6 +1,6 @@
 Package.describe({
   name: "thany:gdpr-cookie",
-  version: "0.1.0",
+  version: "0.2.0",
   summary: "A jQuery plugin to manage cookie settings in compliance with EU law",
   git: "https://github.com/thany/gdpr-cookie.git",
   documentation: "README.md"
