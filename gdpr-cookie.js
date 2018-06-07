@@ -59,8 +59,13 @@
         }
     };
     
+    var validateCookieName = function(name) {
+        // Cookie name may consist of \u0021-\u007e, excluding whitespace and characters , ; =
+        return name.replace(/[^\u0021-\u007e]|[,;=\s]/g, "");
+    };
+    
     var getPreferences = function() {
-        var preferences = getCookie("cookieControlPrefs");
+        var preferences = getCookie(settings.cookieName);
         try {
             preferences = JSON.parse(preferences);
         }
@@ -115,6 +120,7 @@
             message: "Cookies enable you to use shopping carts and to personalize your experience on our sites, tell us which parts of our websites people have visited, help us measure the effectiveness of ads and web searches, and give us insights into user behaviour so we can improve our communications and products.",
             delay: 2000,
             expires: 30,
+            cookieName: "cookieControlPrefs",
             acceptBtnLabel: "Accept cookies",
             advancedBtnLabel: "Customize cookies",
             customShowMessage: undefined,
@@ -146,6 +152,9 @@
         else {
             settings.cookieTypes = defaultSettings.cookieTypes;
         }
+        
+        // Coerce into a string and valid cookie name
+        settings.cookieName = validateCookieName(String(settings.cookieName || "")) || "cookieControlPrefs";
         
         $(function() { display(); });
     };
@@ -235,7 +244,7 @@
 
                 // Save user cookie preferences (in a cookie!)
                 var prefs = $.map(elements.allChecks.filter(function() { return this.checked || this.disabled; }), function(checkbox) { return checkbox.value; });
-                setCookie("cookieControlPrefs", JSON.stringify(prefs), settings.expires);
+                setCookie(settings.cookieName, JSON.stringify(prefs), settings.expires);
 
                 // Trigger cookie accept event
                 body.trigger("gdpr:accept");

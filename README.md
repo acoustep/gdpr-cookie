@@ -118,6 +118,10 @@ A delay in milliseconds to wait until displaying the popup after the page has lo
 
 The time in days for the cookie expiry. This means the cookie that remembers what the visitor has chosen. Cookies *you* set, are unaffected. Default is 30 days.
 
+### cookieName
+
+The name of the cookie to write to. Any characters forbidden in a cookie name (as per the specification) will automatically be removed. Default is `"cookieControlPrefs"`.
+
 ### acceptBtnLabel
 
 Label for the accept button. No html is allowed. Default is `"Accept cookies"`.
@@ -184,7 +188,7 @@ Manually displays the popup, e.g. for visitors to change their preferences. It's
 
 ## Cookie
 
-When the visitor presses the accept button, the cookie `cookieControlPrefs` will contain an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
+When the visitor presses the accept button, the cookie `cookieControlPrefs` (name can be customized) will contain an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
 
 ## Conditionally render
 
