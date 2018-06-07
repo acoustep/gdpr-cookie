@@ -310,6 +310,9 @@
         if (value === "essential") {
             return true;
         }
+        else if (!preferences) {
+            return false;
+        }
         else if (value !== undefined) {
             return preferences.indexOf(value) >= 0;
         }
