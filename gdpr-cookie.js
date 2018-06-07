@@ -59,6 +59,21 @@
         }
     };
     
+    var getPreferences = function() {
+        var preferences = getCookie("cookieControlPrefs");
+        try {
+            preferences = JSON.parse(preferences);
+        }
+        catch(ex) {
+            return;
+        }
+
+        if (!Array.isArray(preferences) || !preferences.length) {
+            return;
+        }
+        return preferences;
+    };
+    
     $.gdprcookie = { };
         
     $.gdprcookie.init = function(options) {
@@ -133,8 +148,7 @@
         }
         
         var body = $("body"),
-            myCookie = getCookie("cookieControl"),
-            myCookiePrefs = getCookie("cookieControlPrefs");
+            myCookiePrefs = getPreferences();
         
         var elements = {
             container: undefined,
@@ -148,8 +162,7 @@
             nonessentialChecks: [ ]
         };
             
-        var setCookieControl = function(value, expiryDays) {
-            setCookie("cookieControl", value, expiryDays);
+        var hide = function() {
             if (elements.container) {
                 if ($.isFunction(settings.customHideMessage)) {
                     settings.customHideMessage.call(elements.container, elements.container);
@@ -163,8 +176,12 @@
                 }
             }
         };
+        
+        if (!Array.isArray(myCookiePrefs) || !myCookiePrefs.length) {
+            myCookiePrefs = undefined;
+        }
 
-        if (alwaysShow || !myCookie || !myCookiePrefs) {
+        if (alwaysShow || !myCookiePrefs) {
             elements.types = $("<ul/>").append(
                 $.map(settings.cookieTypes, function(field, index) {
                     if (!field.type || !field.value) {
@@ -205,8 +222,8 @@
             
             // When accept button is clicked drop cookie
             var acceptClick = function() {
-                // Set cookie
-                setCookieControl(true, settings.expires);
+                // Hide the cookie message
+                hide();
 
                 // Save user cookie preferences (in a cookie!)
                 var prefs = $.map(elements.allChecks.filter(function() { return this.checked || this.disabled; }), function(checkbox) { return checkbox.value; });
@@ -270,11 +287,7 @@
             }
         }
         else {
-            var cookieVal = true;
-            if (myCookie === undefined) {
-                cookieVal = false;
-            }
-            setCookieControl(cookieVal, settings.expires);
+            hide();
         }
     };
     
@@ -284,20 +297,12 @@
 
     // Method to check if user cookie preference exists
     $.gdprcookie.preference = function(value) {
-        var control = getCookie("cookieControl");
-        var preferences = getCookie("cookieControlPrefs");
-        try {
-            preferences = JSON.parse(preferences);
-        }
-        catch(ex) {
-            preferences = undefined;
-        }
-
-        if (control === undefined || preferences === undefined || !$.isArray(preferences)) {
-            return;
-        }
+        var preferences = getPreferences();
         
-        if (value !== undefined) {
+        if (value === "essential") {
+            return true;
+        }
+        else if (value !== undefined) {
             return preferences.indexOf(value) >= 0;
         }
         return preferences;

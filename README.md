@@ -184,7 +184,7 @@ Manually displays the popup, e.g. for visitors to change their preferences. It's
 
 ## Cookie
 
-When the visitor presses the accept button, the cookie `cookieControl` with value `true` is set along with cookie `cookieControlPrefs` which contains an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
+When the visitor presses the accept button, the cookie `cookieControlPrefs` will contain an array of accepted cookie types e.g. `["preferences", "analytics"]`. This will enable you to perform additional checks where necessary within your application with regard to GDPR regulations. These cookies are accessible by the server as well, enabling you to choose whether or not to render certain passages of code that do or don't comply with the visitor's preferences.
 
 ## Conditionally render
 
