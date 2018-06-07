@@ -71,6 +71,14 @@
         if (!Array.isArray(preferences) || !preferences.length) {
             return;
         }
+        
+        var knownTypes = settings.cookieTypes.map(function(type) {
+            return type.value;
+        });
+        preferences = preferences.filter(function(pref) {
+            return knownTypes.indexOf(pref) >= 0;
+        });
+        
         return preferences;
     };
     
