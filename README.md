@@ -122,6 +122,10 @@ The time in days for the cookie expiry. This means the cookie that remembers wha
 
 The name of the cookie to write to. Any characters forbidden in a cookie name (as per the specification) will automatically be removed. Default is `"cookieControlPrefs"`.
 
+### acceptReload
+
+Whether or not to reload the page after the user presses the accept button. Default is `false`.
+
 ### acceptBtnLabel
 
 Label for the accept button. No html is allowed. Default is `"Accept cookies"`.

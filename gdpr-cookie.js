@@ -121,6 +121,7 @@
             delay: 2000,
             expires: 30,
             cookieName: "cookieControlPrefs",
+            acceptReload: false,
             acceptBtnLabel: "Accept cookies",
             advancedBtnLabel: "Customize cookies",
             customShowMessage: undefined,
@@ -179,7 +180,7 @@
             nonessentialChecks: [ ]
         };
             
-        var hide = function() {
+        var hide = function(canreload) {
             if (elements.container) {
                 if ($.isFunction(settings.customHideMessage)) {
                     settings.customHideMessage.call(elements.container, elements.container);
@@ -191,6 +192,9 @@
                         showing = false;
                     });
                 }
+            }
+            if (canreload && settings.acceptReload) {
+                document.location.reload();
             }
         };
         
@@ -240,7 +244,7 @@
             // When accept button is clicked drop cookie
             var acceptClick = function() {
                 // Hide the cookie message
-                hide();
+                hide(true);
 
                 // Save user cookie preferences (in a cookie!)
                 var prefs = $.map(elements.allChecks.filter(function() { return this.checked || this.disabled; }), function(checkbox) { return checkbox.value; });
@@ -304,7 +308,7 @@
             }
         }
         else {
-            hide();
+            hide(false);
         }
     };
     
