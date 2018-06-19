@@ -153,6 +153,7 @@ An array of objects containing the types of cookies you need to specify. Each ob
 `type` - A title to show on the label next to the checkbox.  
 `value` - A unique name for the type of cookie (e.g. `"essential"`, `"marketing"`, etc).  
 `description` - An optional description that will be rendered in the `title` attribute of the correcponding `<label>`.
+`checked` - A boolean determining if the cookie type is checked by default.
 
 ## Events
 

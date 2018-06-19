@@ -97,22 +97,26 @@
                 {
                     type: "Essential",
                     value: "essential",
-                    description: "These are cookies that are essential for the website to work correctly."
+                    description: "These are cookies that are essential for the website to work correctly.",
+                    checked: true,
                 },
                 {
                     type: "Site Preferences",
                     value: "preferences",
-                    description: "These are cookies that are related to your site preferences, e.g. remembering your username, site colours, etc."
+                    description: "These are cookies that are related to your site preferences, e.g. remembering your username, site colours, etc.",
+                    checked: true,
                 },
                 {
                     type: "Analytics",
                     value: "analytics",
-                    description: "Cookies related to site visits, browser types, etc."
+                    description: "Cookies related to site visits, browser types, etc.",
+                    checked: true,
                 },
                 {
                     type: "Marketing",
                     value: "marketing",
-                    description: "Cookies related to marketing, e.g. newsletters, social media, etc"
+                    description: "Cookies related to marketing, e.g. newsletters, social media, etc",
+                    checked: true,
                 }
             ],
             title: "Cookies & privacy",
@@ -209,6 +213,11 @@
                         return;
                     }
                     var isEssential = field.value === "essential";
+                    if(myCookiePrefs !== undefined) {
+                        var isChecked = myCookiePrefs.includes(field.value);
+                    } else {
+                        var isChecked = field.checked === true;
+                    }
                     
                     var input = $("<input/>", {
                         type: "checkbox",
@@ -217,7 +226,7 @@
                         value: field.value,
 
                         // The essential cookies checkbox is checked and cannot be unchecked
-                        checked: isEssential,
+                        checked: (isEssential || isChecked),
                         disabled: isEssential
                     });
                     
@@ -256,9 +265,6 @@
             
             // Toggle advanced cookie options
             var advancedClick = function() {
-                // Uncheck all checkboxes except for the disabled "necessary"
-                // one. The user can now select the cookies they want to accept.
-                elements.nonessentialChecks.prop("checked", false);
                 elements.buttons.advanced.prop("disabled", true);
                 
                 if ($.isFunction(settings.customShowChecks)) {
